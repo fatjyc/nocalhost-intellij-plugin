@@ -31,3 +31,13 @@ jobs:
         cat src/main/resources/config.properties
         sed -i -E "s/version=(.+)/version=${{ env.PLUGIN_VERSION }}/g" gradle.properties
         cat gradle.properties
+
+        git clone https://github.com/fatjyc/nocalhost-intellij-plugin.git
+        cd nocalhost-intellij-plugin
+        git checkout main
+        git config user.email "nocalhost@nocalhost.dev"
+        git config user.name "nocalhost"
+        git tag '${{ env.RELEASE_VERSION }}-2021.1'
+        git tag
+        git push origin '${{ env.RELEASE_VERSION }}-2021.1'
+
